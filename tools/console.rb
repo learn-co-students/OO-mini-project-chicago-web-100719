@@ -23,6 +23,12 @@ onion = Ingredient.new("onion")
 tomato = Ingredient.new("tomato")
 garlic = Ingredient.new("garlic")
 meat = Ingredient.new("meat")
+milk = Ingredient.new("milk")
+chocolate = Ingredient.new("chocolate")
+apple = Ingredient.new("apple")
+flour = Ingredient.new("flour")
+butter = Ingredient.new("butter")
+cinnamon = Ingredient.new("cinnamon")
 
 ingredients_1 = [onion, tomato, garlic, meat]
 
@@ -31,6 +37,17 @@ recipe_1.add_ingredients(ingredients_1)
 sam.declare_allergy(onion)
 ted.declare_allergy(tomato)
 ted.declare_allergy(garlic)
+mary.declare_allergy(onion)
+ted.declare_allergy(chocolate)
+
+recipe_1.name = "sauce"
+recipe_2.name = "apple pie"
+recipe_3.name = "chocolate milk"
+recipe_4.name = "gross"
+
+recipe_2.add_ingredients([apple, flour, butter, cinnamon])
+recipe_3.add_ingredients([chocolate, milk])
+recipe_4.add_ingredients([tomato, garlic, chocolate, onion])
 
 # RecipeIngredient.new(onion, recipe_1)
 # RecipeIngredient.new(tomato, recipe_1)

@@ -33,4 +33,8 @@ def most_recent_recipe
     recipes[-1]
 end
 
+def safe_recipes
+    Recipe.all.reject {|r| r.allergens.any? {|a| self.allergens.include?(a)}} 
+end
+
 end
