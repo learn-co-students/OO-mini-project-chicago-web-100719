@@ -12,11 +12,9 @@ class User
     end 
 
     def recipes
-        user_recipies = RecipeCard.all.select{|recipecard| 
-            recipecard.user == self}
-        recipies = user_recipies.collect{|recipies|
-            recipies.recipe }
-        recipes
+        user_rc = RecipeCard.all.select{|rc| 
+            rc.user == self}
+        user_rc.collect{|rc| recipies.recipe }
     end 
 
     def add_recipe_card(recipe, date, rating)
@@ -33,12 +31,13 @@ class User
     end
 
     def top_three_recipes
-       user_recipe_cards = RecipeCard.all.select {|recipecard| recipecard.user == self}
-       top_three = user_recipe_cards.max(3) {|a,b| a.rating <=> b.rating}
+       user_rc = RecipeCard.all.select {|rc| rc.user == self}
+       top_three = user_rc.max(3) {|a,b| a.rating <=> b.rating}
        top_three.collect {|recipecard| recipecard.recipe}
     end
 
     def most_recent_recipe
         self.recipes.last
     end 
+    
 end 

@@ -1,10 +1,9 @@
 class Recipe
-    attr_reader :name, :ingredients
+    attr_reader :name, 
     @@all = []
 
     def initialize (name)
         @name = name
-        # @ingredients = ingredients
         self.class.all << self
     end 
 
@@ -13,7 +12,11 @@ class Recipe
     end
 
     def self.most_populars
-        RecipeCard.all.max_by {|recipecard| recipecard.count}.recipe
+        Recipe.all.max_by do |recipe|
+            RecipeCard.all.select do |recipecard| 
+                recipecard.recipe == recipe
+            end.count
+        end
     end 
 
     def users
@@ -22,12 +25,13 @@ class Recipe
     end
 
     def ingredients
-        RecipeIngredient.all.select {|a| a.recipe == self}
+        rec_ing = RecipeIngredient.all.select {|a| a.recipe == self}
+        rec_ing.map {|recipe| recipe.ingredient}
     end 
 
     def allergens
-        allegens_ingredient = Allergy.all.collect { |allergy| allergy.ingredient}
-        allegens_ingredient.select { |ingredient| self.ingredients.include?(ingredient)}
+        allegens = Allergy.all.collect { |allergy| allergy.ingredient}
+        allegens.select { |ingredient| self.ingredients.include?(ingredient)}
     end 
 
     def add_ingredients(array_ing)
